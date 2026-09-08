@@ -45,7 +45,7 @@
 #include <linux/sched/signal.h>
 #endif
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0)
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RHEL_RELEASE_CODE)
 
 static int user_termios_to_kernel_termios(struct ktermios *k,
 						 struct termios2 __user *u)
@@ -318,7 +318,7 @@ static void tty0tty_close(struct tty_struct *tty, struct file *file)
 		tty0tty_do_close(tty0tty);
 }
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 6, 0)
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 6, 0) || defined(RHEL_RELEASE_CODE)
 static ssize_t tty0tty_write(struct tty_struct *tty, const unsigned char *buffer, size_t count)
 #else
 static int tty0tty_write(struct tty_struct *tty, const unsigned char *buffer, int count)
@@ -391,7 +391,7 @@ static int tty0tty_write_room(struct tty_struct *tty)
 
 
 #define RELEVANT_IFLAG(iflag) ((iflag) & (IGNBRK|BRKINT|IGNPAR|PARMRK|INPCK))
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0)
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RHEL_RELEASE_CODE)
 static void tty0tty_set_termios(struct tty_struct *tty, const struct ktermios *old_termios)
 #else
 static void tty0tty_set_termios(struct tty_struct *tty, struct ktermios *old_termios)
