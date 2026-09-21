@@ -92,7 +92,7 @@ MODULE_LICENSE("GPL");
 
 
 #define TTY0TTY_MAJOR		0	/* dynamic allocation of major number */
-#define TTY0TTY_MINORS		8	/* device number, always even*/
+#define TTY0TTY_MINORS		16	/* device number, always even*/
 
 /* fake UART values */
 //out
